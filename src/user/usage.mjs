@@ -1,5 +1,5 @@
 import * as eventTypeFactory from '../shared/domain/eventTypeFactory.mjs'
-import * as messageTypeFactory from '../shared/domain/messageTypeFactory.mjs'
+import * as messageTypeFactory from '../shared/application/messageTypeFactory.mjs'
 import { AccessRegistry } from '../shared/infrastructure/AccessRegistry.mjs'
 import { AuthenticationTokenRegistry } from '../shared/infrastructure/AuthenticationTokenRegistry.mjs'
 import { DomainEventPublisher } from '../shared/infrastructure/DomainEventPublisher.mjs'

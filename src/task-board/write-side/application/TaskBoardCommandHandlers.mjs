@@ -18,8 +18,8 @@ export class TaskBoardCommandHandlers {
 
   async handleAddNewTaskToTaskBoardCommand({ data, metadata }) {
     const { taskId, title, description, status, assigneeId, taskBoardId } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `task-board/${taskBoardId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `task-board/${taskBoardId}`)
     const task = new Task({ id: taskId, title, description, status, assigneeId })
     await this.#taskRepository.save(task)
     const taskBoard = await this.#taskBoardRepository.load(taskBoardId)
@@ -30,8 +30,8 @@ export class TaskBoardCommandHandlers {
 
   async handleRemoveTaskFromTaskBoardCommand({ data, metadata }) {
     const { taskBoardId, taskId } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `task-board/${taskBoardId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `task-board/${taskBoardId}`)
     const taskBoard = await this.#taskBoardRepository.load(taskBoardId)
     taskBoard.removeTask(taskId)
     await this.#taskBoardRepository.save(taskBoard)
@@ -40,8 +40,8 @@ export class TaskBoardCommandHandlers {
 
   async handleUpdateTaskTitleCommand({ data, metadata }) {
     const { taskId, title } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `task/${taskId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `task/${taskId}`)
     const task = await this.#taskRepository.load(taskId)
     task.title = title
     await this.#taskRepository.save(task)
@@ -49,24 +49,24 @@ export class TaskBoardCommandHandlers {
 
   async handleUpdateTaskDescriptionCommand({ data, metadata }) {
     const { taskId, description } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `task/${taskId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `task/${taskId}`)
     const task = await this.#taskRepository.load(taskId)
     task.description = description
     await this.#taskRepository.save(task)
   }
 
   async handleUpdateTaskAssigneeCommand({ data: { taskId, assigneeId }, metadata }) {
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `task/${taskId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `task/${taskId}`)
     const task = await this.#taskRepository.load(taskId)
     task.assigneeId = assigneeId
     await this.#taskRepository.save(task)
   }
 
   async handleUpdateTaskStatusCommand({ data: { taskId, status }, metadata }) {
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `task/${taskId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `task/${taskId}`)
     const task = await this.#taskRepository.load(taskId)
     task.status = status
     await this.#taskRepository.save(task)

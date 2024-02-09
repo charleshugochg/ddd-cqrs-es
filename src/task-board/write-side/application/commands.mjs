@@ -1,4 +1,4 @@
-import { createMessageType } from '../../../shared/domain/messageTypeFactory.mjs'
+import { createMessageType } from '../../../shared/application/messageTypeFactory.mjs'
 
 export const AddNewTaskToTaskBoardCommand = createMessageType('AddNewTaskToTaskBoard', {
   taskId: 'string',

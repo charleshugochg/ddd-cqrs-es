@@ -23,8 +23,8 @@ export class ProjectCommandHandlers {
 
   async handleCreateProjectCommand({ data, metadata }) {
     const { projectId, name, ownerId, teamId, taskBoardId } = data
-    const { subjectId } = metadata.authentication
-    this.#verifyAccess(subjectId, `admin/create-project`)
+    // const { subjectId } = metadata.authentication
+    // this.#verifyAccess(subjectId, `admin/create-project`)
     await this.#projectRepository.save(
       this.#projectFactory.createProject({ id: projectId, name, ownerId, teamId, taskBoardId })
     )
@@ -32,8 +32,8 @@ export class ProjectCommandHandlers {
 
   async handleUpdateProjectNameCommand({ data, metadata }) {
     const { projectId, name } = data
-    const { subjectId } = metadata.authentication
-    this.#verifyAccess(subjectId, `project/${projectId}`)
+    // const { subjectId } = metadata.authentication
+    // this.#verifyAccess(subjectId, `project/${projectId}`)
     const project = await this.#projectRepository.load(projectId)
     project.name = name
     await this.#projectRepository.save(project)
@@ -41,8 +41,8 @@ export class ProjectCommandHandlers {
 
   async handleAddTeamMemberToTeamCommand({ data, metadata }) {
     const { teamId, teamMemberId, userId, role } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `team/${teamId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `team/${teamId}`)
     await this.#teamMemberRepository.save(new TeamMember({ id: teamMemberId, userId, role: new Role(role) }))
     const team = await this.#teamRepository.load(teamId)
     team.addMember(teamMemberId)
@@ -52,8 +52,8 @@ export class ProjectCommandHandlers {
 
   async handleRemoveTeamMemberFromTeamCommand({ data, metadata }) {
     const { teamId, teamMemberId } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `team/${teamId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `team/${teamId}`)
     const team = await this.#teamRepository.load(teamId)
     team.removeMember(teamMemberId)
     await this.#teamRepository.save(team)

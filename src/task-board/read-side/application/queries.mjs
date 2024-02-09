@@ -1,3 +1,3 @@
-import { createMessageType } from '../../../shared/domain/messageTypeFactory.mjs'
+import { createMessageType } from '../../../shared/application/messageTypeFactory.mjs'
 
 export const FindTasksOnTaskBoardQuery = createMessageType('FindTasksOnTaskBoard', { taskBoardId: 'string' })

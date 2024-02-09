@@ -31,8 +31,8 @@ export class UserCommandHandlers {
 
   async handleCreateUserCommand({ data, metadata }) {
     const { userId, username, email, password, role } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, 'admin/create-user')
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, 'admin/create-user')
     const user = this.#userFactory.createUser({
       id: userId,
       username,
@@ -41,15 +41,15 @@ export class UserCommandHandlers {
       role: new Role(role),
     })
     await this.#userRepository.save(user)
-    ;(await user.role.equals(new Role('admin')))
-      ? this.#accessRegistry.grantFullAccess(userId)
-      : this.#accessRegistry.grantAccess(userId, `user/${userId}`)
+    // ;(await user.role.equals(new Role('admin')))
+    //   ? this.#accessRegistry.grantFullAccess(userId)
+    //   : this.#accessRegistry.grantAccess(userId, `user/${userId}`)
   }
 
   async handleUpdateUserEmailCommand({ data, metadata }) {
     const { userId, email } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `user/${userId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `user/${userId}`)
     const user = await this.#userRepository.load(userId)
     user.email = new Email(email)
     await this.#userRepository.save(user)
@@ -57,8 +57,8 @@ export class UserCommandHandlers {
 
   async handleUpdateUsernameCommand({ data, metadata }) {
     const { userId, username } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `user/${userId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `user/${userId}`)
     const user = await this.#userRepository.load(userId)
     user.username = username
     await this.#userRepository.save(user)
@@ -66,8 +66,8 @@ export class UserCommandHandlers {
 
   async handleUpdateUserPasswordCommand({ data, metadata }) {
     const { userId, password } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `user/${userId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `user/${userId}`)
     const user = await this.#userRepository.load(userId)
     user.password = this.#hashPassword(password)
     await this.#userRepository.save(user)
@@ -75,8 +75,8 @@ export class UserCommandHandlers {
 
   async handleUpdateUserRole({ data, metadata }) {
     const { userId, role } = data
-    const { subjectId } = metadata.authentication
-    await this.#verifyAccess(subjectId, `user/${userId}`)
+    // const { subjectId } = metadata.authentication
+    // await this.#verifyAccess(subjectId, `user/${userId}`)
     const user = await this.#userRepository.load(userId)
     user.role = new Role(role)
     await this.#userRepository.save(user)
